@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xchange-mcp"
+version = "0.1.0"
+description = "MCP server for crypto exchange access via xchange"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+dependencies = [
+    "xchange @ git+https://github.com/dchou/xchange.git",
+    "mcp>=1.2.0",
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "redis[hiredis]>=5.0.0",
+]
+
+[project.scripts]
+xchange-mcp = "xchange_mcp.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["xchange_mcp*"]
