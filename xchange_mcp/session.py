@@ -59,7 +59,7 @@ class SessionManager:
         dryrun = self._settings.dryrun or os.getenv("DRYRUN", "false").lower() == "true"
         if dryrun:
             import ccxt.async_support as ccxt
-            from dryrun_exchange import DryRunExchangeClient
+            from xchange import DryRunExchangeClient
 
             raw_exchange = client.exchange
             client.exchange = DryRunExchangeClient(
