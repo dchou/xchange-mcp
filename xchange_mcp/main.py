@@ -52,8 +52,11 @@ async def health():
     return {"status": "ok"}
 
 
-# Mount FastMCP SSE routes
+# Legacy SSE transport: GET /sse  POST /messages/
 app.mount("/", mcp.sse_app())
+
+# Modern streamable-HTTP transport: POST /mcp
+app.mount("/mcp", mcp.streamable_http_app())
 
 
 # ---------------------------------------------------------------------------
@@ -73,25 +76,16 @@ def main():
     args = parser.parse_args()
 
     if args.transport == "stdio":
-        import asyncio
-        import redis.asyncio as aioredis
-
-        async def run_stdio():
-            global _session_manager
-            redis_client = aioredis.from_url(settings.redis_url, decode_responses=True)
-            _session_manager = SessionManager(redis_client, settings)
-            set_session_manager(_session_manager)
-            try:
-                await mcp.run_async(transport="stdio")
-            finally:
-                await _session_manager.close_all()
-                await redis_client.aclose()
-
-        asyncio.run(run_stdio())
+        # aioredis.from_url() is synchronous construction; actual I/O happens
+        # inside mcp.run()'s event loop when tools are called.
+        redis_client = aioredis.from_url(settings.redis_url, decode_responses=True)
+        _session_manager = SessionManager(redis_client, settings)
+        set_session_manager(_session_manager)
+        mcp.run(transport="stdio")
     else:
         import uvicorn
         uvicorn.run(
-            "mcp_server.main:app",
+            "xchange_mcp.main:app",
             host=args.host,
             port=args.port,
             reload=False,
