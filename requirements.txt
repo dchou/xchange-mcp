@@ -1,6 +1,9 @@
 # Install the package in editable mode first:
 #   pip install -e .
 # Then install dev/test dependencies:
+fastapi
+uvicorn
+mcp
 pytest>=8.0
 pytest-asyncio>=0.23
 fakeredis[aioredis]>=2.20

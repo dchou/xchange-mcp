@@ -90,8 +90,8 @@ def main():
             "main:app",
             host=args.host,
             port=args.port,
-            #LIVE reload=False,
-            reload=True, #DEBUG
+            reload=False, #LIVE 
+            #DEBUG reload=True, 
         )
 
 

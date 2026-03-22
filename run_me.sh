@@ -8,4 +8,4 @@ HOST="${MCP_HOST:-0.0.0.0}"
 PORT="${MCP_PORT:-8888}"
 
 echo "Starting xchange-mcp on $HOST:$PORT ..."
-exec python main.py --transport sse --host "$HOST" --port "$PORT"
+exec uvicorn main:app --host "$HOST" --port "$PORT" --no-access-log
