@@ -14,6 +14,7 @@ from contextlib import asynccontextmanager
 
 import redis.asyncio as aioredis
 from fastapi import FastAPI
+from fastapi_key_auth import AuthorizerMiddleware
 
 from config import settings
 from server import mcp, set_session_manager
@@ -48,8 +49,12 @@ async def lifespan(app: FastAPI):
     await redis_client.aclose()
 
 
-app = FastAPI(title="exchange-client MCP", lifespan=lifespan)
-
+app = FastAPI(title="xchange MCP", lifespan=lifespan)
+app.add_middleware(AuthorizerMiddleware, public_paths=["/health"])
+# app.add_middleware(AuthorizerMiddleware, public_paths=["/mcp"], key_pattern="API_KEY_")
+# optional use regex startswith
+# app.add_middleware(AuthorizerMiddleware, public_paths=["/ping", "^/users"])
+# app.add_middleware(AuthorizerMiddleware, public_paths=["/health", "/mcp"])   <--- this is literally no auth needed
 
 @app.get("/health")
 async def health():
@@ -66,7 +71,7 @@ app.mount("/", _mcp_http_app)
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="exchange-client MCP server")
+    parser = argparse.ArgumentParser(description="xchange MCP server")
     parser.add_argument(
         "--transport",
         choices=["sse", "stdio"],
