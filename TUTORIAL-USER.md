@@ -4,6 +4,18 @@ How to use the xchange-mcp tools with Claude Code to manage your crypto exchange
 
 ---
 
+## Add xchange-mcp to Claude Code
+
+```bash
+cd working_directory
+claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp list
+```
+
+Then you can start claude to use
+
+---
+
 ## How It Works
 
 All tools follow a two-step pattern:

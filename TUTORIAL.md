@@ -63,6 +63,15 @@ uv pip install git+https://github.com/dchou/xchange-mcp.git
 
 ---
 
+## run on public server
+
+Now on the remote server, create a .env file in the xchange_mcp/ directory:
+```
+echo 'MCP_ALLOWED_HOSTS=["tokyo2.ezcoin.cc:8888","localhost:8888"]' >> ~/xchange-mcp/xchange_mcp/.env
+``
+
+---
+
 ## Adding xchange-mcp to Claude Code
 
 Claude Code uses stdio transport — no manual server startup needed. Claude Code launches the process automatically.
