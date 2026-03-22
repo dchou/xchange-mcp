@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     max_pool_size: int = 50
     encryption_key: str = ""         # optional Fernet key for encrypting configs in Redis
     dryrun: bool = False
+    allowed_hosts: list[str] = []    # e.g. ["myserver.com:8888", "localhost:8888"]
 
     model_config = {"env_prefix": "MCP_", "env_file": ".env", "extra": "ignore"}
 

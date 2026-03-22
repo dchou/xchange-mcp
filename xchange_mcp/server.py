@@ -6,7 +6,9 @@ import logging
 import os
 
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 
+from config import settings as _settings
 from error_handling import handle_exception
 from models import (
     CancelAllOrdersInput,
@@ -29,7 +31,11 @@ from models import (
 
 logger = logging.getLogger(__name__)
 
-mcp = FastMCP("exchange-client")
+_security = TransportSecuritySettings(
+    enable_dns_rebinding_protection=bool(_settings.allowed_hosts),
+    allowed_hosts=_settings.allowed_hosts,
+)
+mcp = FastMCP("exchange-client", transport_security=_security)
 
 # session_manager is injected by main.py after startup
 _session_manager = None
