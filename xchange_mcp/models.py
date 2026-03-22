@@ -90,6 +90,7 @@ class FetchOhlcvInput(BaseModel):
 class FetchMyTradesInput(BaseModel):
     session_id: str
     symbol: Optional[str] = Field(default=None, description="Trading pair filter")
+    limit: Optional[int] = Field(default=50, description="Max number of trades to return (default 50)")
 
 
 class GetClosedPnlsInput(BaseModel):

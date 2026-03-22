@@ -7,8 +7,8 @@ import os
 
 from mcp.server.fastmcp import FastMCP
 
-from .error_handling import handle_exception
-from .models import (
+from error_handling import handle_exception
+from models import (
     CancelAllOrdersInput,
     CancelOrderInput,
     ClosePositionInput,
@@ -227,11 +227,11 @@ async def close_position(
 
 
 @mcp.tool()
-async def fetch_my_trades(session_id: str, symbol: str | None = None) -> dict:
+async def fetch_my_trades(session_id: str, symbol: str | None = None, limit: int = 50) -> dict:
     """Fetch personal trade history, optionally filtered by symbol."""
     try:
         client = await _session_manager.get_client(session_id)
-        result = await client.fetch_my_trades(symbol)
+        result = await client.fetch_my_trades(symbol, limit=limit)
         return {"success": True, "trades": result}
     except Exception as exc:
         return handle_exception(exc)

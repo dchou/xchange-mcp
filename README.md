@@ -30,6 +30,25 @@ sudo apt install redis-server && sudo systemctl start redis
 pip install git+https://github.com/dchou/xchange-mcp.git
 ```
 
+## Install xchange package:
+```bash
+pip install "xchange @ git+https://github.com/dchou/xchange.git"
+```
+
+### Upgrade to latest version of xchange package:
+```bash
+pip install --upgrade "xchange @ git+https://github.com/dchou/xchange.git"
+```
+Or to reinstall the whole project with the latest xchange:
+```bash
+pip install --force-reinstall "xchange @ git+https://github.com/dchou/xchange.git"
+```
+
+### uv-managed environment:
+```bash
+uv pip install --upgrade "xchange @ git+https://github.com/dchou/xchange.git"
+```
+
 **Local development:**
 ```bash
 git clone https://github.com/dchou/xchange-mcp.git

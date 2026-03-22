@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xchange-mcp"
-version = "0.1.0"
+dynamic = ["version"]
 description = "MCP server for crypto exchange access via xchange"
 requires-python = ">=3.10"
 license = { text = "Proprietary" }
@@ -23,3 +23,6 @@ xchange-mcp = "xchange_mcp.main:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["xchange_mcp*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "xchange_mcp.__version__"}

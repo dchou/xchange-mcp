@@ -10,8 +10,8 @@ import uuid
 from datetime import datetime
 from typing import Any, Optional
 
-from .config import Settings
-from .error_handling import SessionNotFoundError
+from config import Settings
+from error_handling import SessionNotFoundError
 
 try:
     from xchange import ExchangeClient
@@ -144,9 +144,15 @@ class SessionManager:
         logger.info(f"[{oldest_id}] Evicted from pool (LRU)")
 
     async def close_all(self) -> None:
-        """Disconnect all clients in pool (called on server shutdown)."""
+        """Disconnect all clients in pool on shutdown, preserving Redis configs for reconnection."""
         async with self._lock:
-            session_ids = list(self._pool.keys())
+            pool_snapshot = list(self._pool.items())
+            self._pool.clear()
+            self._last_used.clear()
 
-        for sid in session_ids:
-            await self.destroy_session(sid)
+        for sid, client in pool_snapshot:
+            try:
+                await client.disconnect()
+            except Exception as exc:
+                logger.warning(f"[{sid}] Error during disconnect: {exc}")
+            logger.info(f"[{sid}] Disconnected (config preserved in Redis)")
