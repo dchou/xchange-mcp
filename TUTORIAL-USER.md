@@ -12,8 +12,18 @@ claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp
 claude mcp list
 ```
 
+
+### Trouble shooting:
+
+
 Then you can start claude to use
 
+If you need to remove and add mcp again:
+```bash
+claude mcp remove xchange
+claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp list
+```
 ---
 
 ## How It Works

@@ -9,7 +9,7 @@ import pytest
 import pytest_asyncio
 from unittest.mock import AsyncMock, patch
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
 
 import fakeredis.aioredis
 from fastapi.testclient import TestClient
@@ -21,10 +21,10 @@ pytestmark = pytest.mark.asyncio
 @pytest_asyncio.fixture
 async def app_with_mocks(mock_exchange_client):
     """Create FastAPI test app with fakeredis and mock ExchangeClient."""
-    import mcp_server.main as main_module
-    import mcp_server.server as server_module
-    from mcp_server.config import Settings
-    from mcp_server.session import SessionManager
+    import main as main_module
+    import server as server_module
+    from config import Settings
+    from session import SessionManager
 
     fake_redis = fakeredis.aioredis.FakeRedis(decode_responses=True)
     test_settings = Settings(
@@ -36,7 +36,7 @@ async def app_with_mocks(mock_exchange_client):
 
     sm = SessionManager(fake_redis, test_settings)
 
-    with patch("mcp_server.session.ExchangeClient") as MockClass:  # module-level import
+    with patch("session.ExchangeClient") as MockClass:  # module-level import
         MockClass.create = AsyncMock(return_value=mock_exchange_client)
         server_module.set_session_manager(sm)
         yield sm, mock_exchange_client, MockClass
@@ -47,7 +47,7 @@ async def app_with_mocks(mock_exchange_client):
 
 
 async def test_health_endpoint():
-    from mcp_server.main import app
+    from main import app
     with TestClient(app, raise_server_exceptions=False) as client:
         # health endpoint — should return 200 synchronously
         resp = client.get("/health")
@@ -57,7 +57,7 @@ async def test_health_endpoint():
 
 async def test_init_and_fetch_balance_flow(app_with_mocks):
     sm, mock_client, MockClass = app_with_mocks
-    from mcp_server.server import init_exchange, fetch_balance
+    from server import init_exchange, fetch_balance
 
     # Init
     result = await init_exchange(exchange_name="binance", api_key="k", api_secret="s")
@@ -73,7 +73,7 @@ async def test_init_and_fetch_balance_flow(app_with_mocks):
 async def test_session_persists_across_requests(app_with_mocks):
     """Second get_client call should reuse the cached instance."""
     sm, mock_client, MockClass = app_with_mocks
-    from mcp_server.server import init_exchange, fetch_balance, fetch_ticker
+    from server import init_exchange, fetch_balance, fetch_ticker
 
     result = await init_exchange(exchange_name="binance", api_key="k", api_secret="s")
     session_id = result["session_id"]
@@ -86,8 +86,8 @@ async def test_session_persists_across_requests(app_with_mocks):
 
 
 async def test_close_exchange_cleans_up(app_with_mocks):
-    from mcp_server.server import init_exchange, close_exchange, fetch_balance
-    from mcp_server.error_handling import SessionNotFoundError
+    from server import init_exchange, close_exchange, fetch_balance
+    from error_handling import SessionNotFoundError
 
     sm, mock_client, MockClass = app_with_mocks
 

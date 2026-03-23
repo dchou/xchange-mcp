@@ -49,8 +49,9 @@ async def lifespan(app: FastAPI):
     await redis_client.aclose()
 
 
-app = FastAPI(title="xchange MCP", lifespan=lifespan)
-app.add_middleware(AuthorizerMiddleware, public_paths=["/health"])
+app = FastAPI(title="xchange-mcp", lifespan=lifespan)
+#### disable fastapi-key-auth for now
+# app.add_middleware(AuthorizerMiddleware, public_paths=["/health"])
 # app.add_middleware(AuthorizerMiddleware, public_paths=["/mcp"], key_pattern="API_KEY_")
 # optional use regex startswith
 # app.add_middleware(AuthorizerMiddleware, public_paths=["/ping", "^/users"])
@@ -71,7 +72,7 @@ app.mount("/", _mcp_http_app)
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="xchange MCP server")
+    parser = argparse.ArgumentParser(description="xchange-mcp server")
     parser.add_argument(
         "--transport",
         choices=["sse", "stdio"],

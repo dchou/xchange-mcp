@@ -9,12 +9,12 @@ import pytest_asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 # Ensure library root is importable
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
 
 import fakeredis.aioredis
 
-from mcp_server.config import Settings
-from mcp_server.session import SessionManager
+from config import Settings
+from session import SessionManager
 
 
 # ---------------------------------------------------------------------------
@@ -79,6 +79,6 @@ async def session_manager(fake_redis, test_settings, mock_exchange_client):
     sm = SessionManager(fake_redis, test_settings)
 
     # Patch the module-level ExchangeClient in session.py
-    with patch("mcp_server.session.ExchangeClient") as MockClass:
+    with patch("session.ExchangeClient") as MockClass:
         MockClass.create = AsyncMock(return_value=mock_exchange_client)
         yield sm, MockClass, mock_exchange_client

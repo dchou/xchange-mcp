@@ -7,8 +7,8 @@ import pytest
 import pytest_asyncio
 from unittest.mock import AsyncMock, patch
 
-from mcp_server.error_handling import SessionNotFoundError
-from mcp_server.session import SessionManager, _config_key
+from error_handling import SessionNotFoundError
+from session import SessionManager, _config_key
 
 
 pytestmark = pytest.mark.asyncio

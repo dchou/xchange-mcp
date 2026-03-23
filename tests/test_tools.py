@@ -8,13 +8,13 @@ from unittest.mock import AsyncMock, patch
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
 
 pytestmark = pytest.mark.asyncio
 
 # Import the tool functions and the module-level setter
-import mcp_server.server as server_module
-from mcp_server.server import (
+import server as server_module
+from server import (
     init_exchange,
     close_exchange,
     fetch_balance,
@@ -33,7 +33,7 @@ from mcp_server.server import (
     get_closed_pnls,
     set_leverage,
 )
-from mcp_server.error_handling import SessionNotFoundError
+from error_handling import SessionNotFoundError
 
 
 SAMPLE_CONFIG = dict(
