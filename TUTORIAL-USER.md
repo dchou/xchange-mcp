@@ -86,6 +86,20 @@ any text responses.
 When calling `mcp__xchange__init_exchange`, pass credentials silently. Only mention
 non-sensitive parameters (e.g. `exchange_name`, `market_type`, `is_testnet`) in
 any text output.
+
+## Credentials location
+The exchange credentials are in .env file, where:
+- bb stands for bybit, 
+- bn stands for binance, 
+- ok stands for okx, 
+- gt stands for gateio,
+- bg stands for bitget,
+- bp stands for backpack,
+- bx stands for bingx,
+- po stands for pionex,
+- max stands for max,
+- mx stands for MEXC,
+- hb stands for HTX
 ```
 
 ---
@@ -95,6 +109,8 @@ any text output.
 Tell Claude which exchange and account you want to use. Claude will call `init_exchange` on your behalf.
 
 **Examples:**
+- "What is my Bybit demo balance"
+- "What are the open orders of Bybit demo"
 - "Connect to my Bybit demo account"
 - "Initialize OKX with my okDDemo credentials"
 - "Use my bgDDemo Bitget account"
