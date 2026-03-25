@@ -1,6 +1,12 @@
 # xchange-mcp
 
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
+[![Telegram](https://img.shields.io/badge/Community-Telegram-2CA5E0?logo=telegram)](https://t.me/xchange_mcp)
+
 MCP server exposing 17 crypto exchange tools via the [xchange](https://github.com/dchou/xchange) library. Supports 20+ exchanges (Binance, Bybit, OKX, Gate.io, Hyperliquid, Deribit, Kraken, KuCoin, Bitget, and more).
+
+**[Join the Telegram community](https://t.me/xchange_mcp)** — share feedback, report bugs, request features.
 
 ## Features
 
@@ -258,6 +264,17 @@ All tools follow the same pattern: first call `init_exchange` to get a `session_
 | `fetch_ticker` | Get current price/ticker |
 | `fetch_order_book` | Get order book depth |
 | `fetch_ohlcv` | Get candlestick data |
+
+## Feedback & Community
+
+**[Telegram: t.me/xchange_mcp](https://t.me/xchange_mcp)**
+
+Three things I want to know:
+1. What's working well for you?
+2. What's broken or confusing? (include: exchange name + error message + what you tried)
+3. What tool or feature is missing that you wish existed?
+
+You can also [open a GitHub Issue](https://github.com/dchou/xchange-mcp/issues/new/choose) for bugs and feature requests.
 
 ## License
 

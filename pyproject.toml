@@ -8,6 +8,10 @@ dynamic = ["version"]
 description = "MCP server for crypto exchange access via xchange"
 requires-python = ">=3.10"
 license = { text = "Proprietary" }
+
+[project.urls]
+Homepage = "https://github.com/dchou/xchange-mcp"
+Repository = "https://github.com/dchou/xchange-mcp"
 dependencies = [
     "xchange @ git+https://github.com/dchou/xchange.git",
     "mcp>=1.2.0",
