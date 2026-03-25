@@ -35,7 +35,7 @@ _security = TransportSecuritySettings(
     enable_dns_rebinding_protection=bool(_settings.allowed_hosts),
     allowed_hosts=_settings.allowed_hosts,
 )
-mcp = FastMCP("xchange", transport_security=_security)
+mcp = FastMCP("xchange-mcp", transport_security=_security)
 
 # session_manager is injected by main.py after startup
 _session_manager = None

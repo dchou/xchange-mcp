@@ -65,9 +65,9 @@ uv pip install git+https://github.com/dchou/xchange-mcp.git
 
 ## run on public server
 
-Now on the remote server, create a .env file in the xchange_mcp/ directory:
+Now on the remote server, create a .env file in the src/xchange-mcp/ directory:
 ```
-echo 'MCP_ALLOWED_HOSTS=["tokyo2.ezcoin.cc:8888","localhost:8888"]' >> ~/xchange-mcp/xchange_mcp/.env
+echo 'MCP_ALLOWED_HOSTS=["tokyo2.ezcoin.cc:8888","localhost:8888"]' >> ~/xchange-mcp/src/xchange-mcp/.env
 ``
 
 ---

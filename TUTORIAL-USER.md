@@ -8,7 +8,7 @@ How to use the xchange-mcp tools with Claude Code to manage your crypto exchange
 
 ```bash
 cd working_directory
-claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
 claude mcp list
 ```
 
@@ -20,8 +20,8 @@ Then you can start claude to use
 
 If you need to remove and add mcp again:
 ```bash
-claude mcp remove xchange
-claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp remove xchange-mcp
+claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
 claude mcp list
 ```
 ---
@@ -111,6 +111,7 @@ Tell Claude which exchange and account you want to use. Claude will call `init_e
 **Examples:**
 - "What is my Bybit demo balance"
 - "What are the open orders of Bybit demo"
+- "Analyze my last 90 days of trades. Show my win rate, average risk-reward, my best and worst performance pairs, and where I'm lossing the most money."
 - "Connect to my Bybit demo account"
 - "Initialize OKX with my okDDemo credentials"
 - "Use my bgDDemo Bitget account"

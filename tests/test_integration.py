@@ -9,7 +9,7 @@ import pytest
 import pytest_asyncio
 from unittest.mock import AsyncMock, patch
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src", "xchange-mcp"))
 
 import fakeredis.aioredis
 from fastapi.testclient import TestClient

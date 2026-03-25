@@ -30,7 +30,7 @@ SSH into the server and run:
 
 ```bash
 KEY=$(openssl rand -hex 32)
-echo "API_KEY_1=$KEY" >> ~/xchange-mcp/xchange_mcp/.env
+echo "API_KEY_1=$KEY" >> ~/xchange-mcp/src/xchange-mcp/.env
 echo "Your API key: $KEY"
 ```
 
@@ -48,13 +48,13 @@ cd ~/xchange-mcp
 Each user or client can have their own key:
 
 ```bash
-echo "API_KEY_2=$(openssl rand -hex 32)" >> ~/xchange-mcp/xchange_mcp/.env
+echo "API_KEY_2=$(openssl rand -hex 32)" >> ~/xchange-mcp/src/xchange-mcp/.env
 ```
 
 ### Viewing existing keys
 
 ```bash
-grep API_KEY ~/xchange-mcp/xchange_mcp/.env
+grep API_KEY ~/xchange-mcp/src/xchange-mcp/.env
 ```
 
 ---
@@ -92,7 +92,7 @@ claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp \
 If no `API_KEY_*` variables are set, `fastapi-key-auth` will raise a startup error. For local development without auth, set a local dev key:
 
 ```bash
-echo "API_KEY_1=localdev" >> xchange_mcp/.env
+echo "API_KEY_1=localdev" >> src/xchange-mcp/.env
 ```
 
 And configure Claude Code accordingly:

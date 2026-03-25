@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock, patch
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src", "xchange-mcp"))
 
 pytestmark = pytest.mark.asyncio
 

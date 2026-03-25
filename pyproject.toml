@@ -21,9 +21,11 @@ dependencies = [
 [project.scripts]
 xchange-mcp = "xchange_mcp.main:main"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["xchange_mcp*"]
+[tool.setuptools]
+packages = ["xchange_mcp"]
+
+[tool.setuptools.package-dir]
+"xchange_mcp" = "src/xchange-mcp"
 
 [tool.setuptools.dynamic]
 version = {attr = "xchange_mcp.__version__"}

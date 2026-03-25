@@ -9,7 +9,7 @@ import pytest_asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 # Ensure library root is importable
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "xchange_mcp"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src", "xchange-mcp"))
 
 import fakeredis.aioredis
 

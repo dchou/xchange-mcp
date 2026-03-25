@@ -2,7 +2,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR/xchange_mcp"
+cd "$SCRIPT_DIR/src/xchange-mcp"
 
 HOST="${MCP_HOST:-0.0.0.0}"
 PORT="${MCP_PORT:-8888}"
