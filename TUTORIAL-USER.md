@@ -12,6 +12,26 @@ claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
 claude mcp list
 ```
 
+## Add xchange-mcp to OpenCode
+
+Create a opencode.json file in the working directory
+```opencode.json
+opencode.json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "xchange-mcp": {
+      "type": "remote",
+      "url": "http://tokyo2.ezcoin.cc:8888/mcp"
+    }
+  }
+}
+```
+
+After restart OpenCode, prompt like :
+```
+Please read CLAUDE.md, the get the balance of Bybit Demo account
+```
 
 ### Trouble shooting:
 

@@ -1,0 +1,72 @@
+Please provide step by step of doing Start promoting — r/ClaudeAI first,
+
+⏺ Posting on r/ClaudeAI — Step by Step
+
+  Step 1: Check the subreddit rules
+
+  Go to reddit.com/r/ClaudeAI → scroll down the right sidebar → read "Community Rules". Look for rules about
+  self-promotion or links. Most AI subreddits allow project showcases as long as they're not pure ads.
+
+  ---
+  Step 2: Create the post
+
+  Go to reddit.com/r/ClaudeAI → click "Create Post"
+
+  Post type: Text (not link — text posts get more engagement and allow formatting)
+
+  ---
+  Step 3: Use this title
+
+  I built an MCP server that connects Claude to 20+ crypto exchanges — live demo inside
+
+  Or if that feels too salesy:
+  xchange-mcp: Connect Claude to Binance, Bybit, OKX and 17 other exchanges via MCP
+
+  ---
+  Step 4: Use this body
+
+  Hey r/ClaudeAI,
+
+  I've been building **xchange-mcp** — an MCP server that gives Claude direct access
+  to crypto exchanges for trading, portfolio management, and market analysis.
+
+  **What you can do:**
+  - Ask Claude to check your balance, open positions, and PnL
+  - Place, cancel, and manage orders by chatting
+  - Pull live prices, order books, and OHLCV candles
+  - Works across 20+ exchanges: Binance, Bybit, OKX, Hyperliquid, Kraken, etc.
+
+  **Connect in one command (no installation):**
+  claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
+
+  Then just ask Claude: *"Check my Bybit balance"* or *"Buy 0.01 BTC on Binance at market"*
+
+  **Links:**
+  - GitHub: https://github.com/dchou/xchange-mcp
+  - Telegram for questions/feedback: https://t.me/xchange_mcp
+
+  Would love to hear what exchanges or tools you'd want added. Still early — feedback welcome.
+
+  ---
+  Step 5: Add a flair
+
+  After posting, Reddit will prompt you to add flair. Pick "Tools" or "Projects" if available.
+
+  ---
+  Step 6: Engage in the first hour
+
+  This is the most important step — Reddit's algorithm boosts posts with early engagement.
+
+  - Reply to every comment within the first 60 minutes
+  - If someone asks a question you can't answer yet, say "Good point — adding that to the roadmap"
+  - Don't edit the post body after it gets traction (Reddit can flag that)
+
+  ---
+  Step 7: Cross-post to r/mcp after 30 minutes
+
+  Once r/ClaudeAI has a few upvotes, use Reddit's "Crosspost" button to share to r/mcp — this gives you a second
+  audience without needing to write a new post.
+
+  ---
+  Timing tip: Post between 9am–12pm PST on a weekday (Tuesday or Wednesday) for maximum visibility.
+
