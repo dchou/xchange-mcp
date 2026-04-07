@@ -66,7 +66,7 @@ def mock_exchange_client():
     client.fetch_my_trades.return_value = []
     client.get_closed_pnls.return_value = []
     client.set_leverage.return_value = {"leverage": 10}
-    client.disconnect = AsyncMock()
+    client.close = AsyncMock()
     return client
 
 

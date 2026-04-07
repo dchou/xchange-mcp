@@ -95,8 +95,8 @@ async def test_destroy_session_removes_from_pool_and_redis(session_manager, fake
     raw = await fake_redis.get(_config_key(session_id))
     assert raw is None
 
-    # Client.disconnect should have been called
-    mock_client.disconnect.assert_awaited_once()
+    # Client.close should have been called
+    mock_client.close.assert_awaited_once()
 
 
 async def test_ttl_refreshed_on_get_client(session_manager, fake_redis):
