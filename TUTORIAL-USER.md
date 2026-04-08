@@ -8,7 +8,7 @@ How to use the xchange-mcp tools with Claude Code to manage your crypto exchange
 
 ```bash
 cd working_directory
-claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp add --transport http xchange-mcp https://xchange-mcp.ezcoin.cc/mcp
 claude mcp list
 ```
 
@@ -22,7 +22,7 @@ opencode.json
   "mcp": {
     "xchange-mcp": {
       "type": "remote",
-      "url": "http://tokyo2.ezcoin.cc:8888/mcp"
+      "url": "https://xchange-mcp.ezcoin.cc/mcp"
     }
   }
 }
@@ -41,7 +41,7 @@ Then you can start claude to use
 If you need to remove and add mcp again:
 ```bash
 claude mcp remove xchange-mcp
-claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp add --transport http xchange-mcp https://xchange-mcp.ezcoin.cc/mcp
 claude mcp list
 ```
 ---
@@ -117,9 +117,12 @@ The exchange credentials are in .env file, where:
 - bp stands for backpack,
 - bx stands for bingx,
 - po stands for pionex,
-- max stands for max,
 - mx stands for MEXC,
-- hb stands for HTX
+- hb stands for HTX,
+- lt stands for lighter,
+- bf stands for bitfinex,
+- max stands for max,
+- bt stands for Bito Pro,
 ```
 
 ---

@@ -25,13 +25,13 @@ No installation required. Connect to the hosted server directly from your AI cli
 ### Claude Code
 
 ```bash
-claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
+claude mcp add --transport http xchange-mcp https://xchange-mcp.ezcoin.cc/mcp
 ```
 
 Verify:
 ```bash
 claude mcp list
-# xchange-mcp: http://tokyo2.ezcoin.cc:8888/mcp (HTTP) - ✓ Connected
+# xchange-mcp: https://xchange-mcp.ezcoin.cc/mcp (HTTP) - ✓ Connected
 ```
 
 ### Claude Desktop
@@ -43,7 +43,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
   "mcpServers": {
     "xchange-mcp": {
       "type": "http",
-      "url": "http://tokyo2.ezcoin.cc:8888/mcp"
+      "url": "https://xchange-mcp.ezcoin.cc/mcp"
     }
   }
 }
@@ -60,7 +60,7 @@ Add to `opencode.json` (or `~/.config/opencode/opencode.json`):
   "mcp": {
     "xchange-mcp": {
       "type": "remote",
-      "url": "http://tokyo2.ezcoin.cc:8888/mcp"
+      "url": "https://xchange-mcp.ezcoin.cc/mcp"
     }
   }
 }
@@ -75,7 +75,7 @@ Add to your OpenClaw MCP config (`~/.config/openclaw/mcp.json`):
   "servers": {
     "xchange-mcp": {
       "type": "http",
-      "url": "http://tokyo2.ezcoin.cc:8888/mcp"
+      "url": "https://xchange-mcp.ezcoin.cc/mcp"
     }
   }
 }

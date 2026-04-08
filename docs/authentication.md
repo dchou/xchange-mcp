@@ -64,7 +64,7 @@ grep API_KEY ~/xchange-mcp/src/xchange-mcp/.env
 Run these commands on the client machine, replacing `<api-key>` with the key from the server:
 
 ```bash
-claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp \
+claude mcp add --transport http xchange https://xchange-mcp.ezcoin.cc/mcp \
   --header "x-api-key: <api-key>"
 ```
 
@@ -72,7 +72,7 @@ Verify the connection:
 
 ```bash
 claude mcp list
-# xchange: http://tokyo2.ezcoin.cc:8888/mcp (HTTP) - ✓ Connected
+# xchange: https://xchange-mcp.ezcoin.cc/mcp (HTTP) - ✓ Connected
 ```
 
 ### Updating an existing entry
@@ -81,7 +81,7 @@ If you need to change the key or URL, remove and re-add:
 
 ```bash
 claude mcp remove xchange
-claude mcp add --transport http xchange http://tokyo2.ezcoin.cc:8888/mcp \
+claude mcp add --transport http xchange https://xchange-mcp.ezcoin.cc/mcp \
   --header "x-api-key: <new-api-key>"
 ```
 

@@ -37,7 +37,7 @@ Please provide step by step of doing Start promoting — r/ClaudeAI first,
   - Works across 20+ exchanges: Binance, Bybit, OKX, Hyperliquid, Kraken, etc.
 
   **Connect in one command (no installation):**
-  claude mcp add --transport http xchange-mcp http://tokyo2.ezcoin.cc:8888/mcp
+  claude mcp add --transport http xchange-mcp https://xchange-mcp.ezcoin.cc/mcp
 
   Then just ask Claude: *"Check my Bybit balance"* or *"Buy 0.01 BTC on Binance at market"*
 
