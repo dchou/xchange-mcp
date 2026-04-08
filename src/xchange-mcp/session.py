@@ -115,7 +115,7 @@ class SessionManager:
 
         if client is not None:
             try:
-                await client.disconnect()
+                await client.close()
             except Exception as exc:
                 logger.warning(f"[{session_id}] Error during disconnect: {exc}")
 
@@ -137,7 +137,7 @@ class SessionManager:
 
         if client is not None:
             try:
-                await client.disconnect()
+                await client.close()
             except Exception:
                 pass
 
@@ -152,7 +152,7 @@ class SessionManager:
 
         for sid, client in pool_snapshot:
             try:
-                await client.disconnect()
+                await client.close()
             except Exception as exc:
                 logger.warning(f"[{sid}] Error during disconnect: {exc}")
             logger.info(f"[{sid}] Disconnected (config preserved in Redis)")
