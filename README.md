@@ -174,6 +174,24 @@ All tools follow the same pattern: first call `init_exchange` to get a `session_
 
 ---
 
+## 
+
+**[Telegram: t.me/xchange_mcp_bot](https://t.me/xchange_mcp_bot)**
+
+You can use xchange-mcp functions with free Telegram bot.
+
+Useage example:
+```
+/help
+/setKey bybit aaaaaaaa bbbbbbb
+/balance bybit
+/orders
+/buy bybit BTC/USDT 0.01 70000 limit
+/buy bybit BTC/USDT 0.01 70000 swap
+/sell bybit BTC/USDT 0.01 70000 swap
+/pnls
+```
+
 ## Feedback & Community
 
 **[Telegram: t.me/xchange_mcp](https://t.me/xchange_mcp)**
