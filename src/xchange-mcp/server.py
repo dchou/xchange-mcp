@@ -16,6 +16,7 @@ from models import (
     ClosePositionInput,
     CreateOrderInput,
     FetchBalanceInput,
+    FetchMarginConfigInput,
     FetchMyTradesInput,
     FetchOhlcvInput,
     FetchOrderBookInput,
@@ -23,8 +24,13 @@ from models import (
     FetchOrdersInput,
     FetchPositionsInput,
     FetchTickerInput,
+    GetBorrowedAmountInput,
+    GetBorrowedRecordsInput,
+    GetBorrowRateInput,
     GetClosedPnlsInput,
+    GetFilledOrdersInput,
     InitExchangeInput,
+    IsTestnetInput,
     SessionInput,
     SetLeverageInput,
 )
@@ -50,6 +56,7 @@ def set_session_manager(sm) -> None:
 # Session tools
 # ---------------------------------------------------------------------------
 
+
 @mcp.tool()
 async def init_exchange(
     exchange_name: str,
@@ -67,24 +74,32 @@ async def init_exchange(
     position_mode: str | None = None,
 ) -> dict:
     """Initialize an exchange connection and return a session_id for subsequent calls."""
-    config = {k: v for k, v in {
-        "exchange_name": exchange_name,
-        "api_key": api_key,
-        "api_secret": api_secret,
-        "api_password": api_password,
-        "is_testnet": is_testnet,
-        "market_type": market_type,
-        "exchange_id": exchange_id,
-        "user_id": user_id,
-        "sub_account_id": sub_account_id,
-        "symbol": symbol,
-        "leverage": leverage,
-        "margin_mode": margin_mode,
-        "position_mode": position_mode,
-    }.items() if v is not None}
+    config = {
+        k: v
+        for k, v in {
+            "exchange_name": exchange_name,
+            "api_key": api_key,
+            "api_secret": api_secret,
+            "api_password": api_password,
+            "is_testnet": is_testnet,
+            "market_type": market_type,
+            "exchange_id": exchange_id,
+            "user_id": user_id,
+            "sub_account_id": sub_account_id,
+            "symbol": symbol,
+            "leverage": leverage,
+            "margin_mode": margin_mode,
+            "position_mode": position_mode,
+        }.items()
+        if v is not None
+    }
     try:
         session_id = await _session_manager.create_session(config)
-        return {"success": True, "session_id": session_id, "exchange_name": exchange_name}
+        return {
+            "success": True,
+            "session_id": session_id,
+            "exchange_name": exchange_name,
+        }
     except Exception as exc:
         return handle_exception(exc)
 
@@ -102,6 +117,7 @@ async def close_exchange(session_id: str) -> dict:
 # ---------------------------------------------------------------------------
 # Account tools
 # ---------------------------------------------------------------------------
+
 
 @mcp.tool()
 async def fetch_balance(session_id: str) -> dict:
@@ -139,6 +155,7 @@ async def get_closed_pnls(session_id: str, symbol: str | None = None) -> dict:
 # ---------------------------------------------------------------------------
 # Order tools
 # ---------------------------------------------------------------------------
+
 
 @mcp.tool()
 async def create_order(
@@ -184,7 +201,9 @@ async def cancel_all_orders(session_id: str, symbol: str | None = None) -> dict:
 
 
 @mcp.tool()
-async def fetch_order(session_id: str, order_id: str, symbol: str | None = None) -> dict:
+async def fetch_order(
+    session_id: str, order_id: str, symbol: str | None = None
+) -> dict:
     """Fetch details for a specific order."""
     try:
         client = await _session_manager.get_client(session_id)
@@ -233,7 +252,9 @@ async def close_position(
 
 
 @mcp.tool()
-async def fetch_my_trades(session_id: str, symbol: str | None = None, limit: int = 50) -> dict:
+async def fetch_my_trades(
+    session_id: str, symbol: str | None = None, limit: int = 50
+) -> dict:
     """Fetch personal trade history, optionally filtered by symbol."""
     try:
         client = await _session_manager.get_client(session_id)
@@ -257,6 +278,7 @@ async def set_leverage(session_id: str, symbol: str, leverage: int) -> dict:
 # ---------------------------------------------------------------------------
 # Market data tools
 # ---------------------------------------------------------------------------
+
 
 @mcp.tool()
 async def fetch_ticker(session_id: str, symbol: str) -> dict:
@@ -297,5 +319,77 @@ async def fetch_ohlcv(
         client = await _session_manager.get_client(session_id)
         result = await client.fetch_ohlcv(symbol, timeframe, since, limit)
         return {"success": True, "ohlcv": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def get_filled_orders(
+    session_id: str,
+    symbol: str | None = None,
+    since: int | None = None,
+) -> dict:
+    """Get filled orders with full trade history using FIFO matching."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        result = await client.get_filled_orders(symbol, since)
+        return {"success": True, "filled_orders": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def get_borrow_rate(session_id: str, asset: str) -> dict:
+    """Get borrow rate for a margin asset."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        result = await client.get_borrow_rate(asset)
+        return {"success": True, "borrow_rate": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def get_borrowed_amount(session_id: str, asset: str) -> dict:
+    """Get borrowed amount for a margin asset."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        result = await client.get_borrowed_amount(asset)
+        return {"success": True, "borrowed_amount": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def get_borrowed_records(session_id: str, asset: str) -> dict:
+    """Get borrowing records for a margin asset."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        result = await client.get_borrowed_records(asset)
+        return {"success": True, "borrowed_records": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def fetch_margin_config(
+    session_id: str,
+    symbol: str | None = None,
+) -> dict:
+    """Fetch margin trading configuration for a symbol."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        result = await client.fetch_margin_config(symbol)
+        return {"success": True, "margin_config": result}
+    except Exception as exc:
+        return handle_exception(exc)
+
+
+@mcp.tool()
+async def is_testnet(session_id: str) -> dict:
+    """Check if the session is using testnet."""
+    try:
+        client = await _session_manager.get_client(session_id)
+        return {"success": True, "is_testnet": client.is_testnet}
     except Exception as exc:
         return handle_exception(exc)

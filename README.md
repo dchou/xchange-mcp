@@ -171,6 +171,11 @@ All tools follow the same pattern: first call `init_exchange` to get a `session_
 | `fetch_ticker` | Get current price/ticker |
 | `fetch_order_book` | Get order book depth |
 | `fetch_ohlcv` | Get candlestick data |
+| `get_borrow_rate` | Get margin borrow rate for an asset |
+| `get_borrowed_amount` | Get borrowed amount for a margin asset |
+| `get_borrowed_records` | Get borrowing records for a margin asset |
+| `fetch_margin_config` | Get margin trading configuration |
+| `is_testnet` | Check if session is using testnet |
 
 ---
 
