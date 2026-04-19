@@ -100,15 +100,21 @@ async def main_async():
                 print(f"fetch_order: {result}")
 
             print(f"\n9. Get borrowed amount after trade...")
-            borrowed_amount = await client.get_borrowed_amount("BTC")
-            print(f"get_borrowed_amount: {borrowed_amount}")
+            borrowed_result = await client.get_borrowed_amount("BTC")
+            print(f"get_borrowed_amount: {borrowed_result}")
 
-            if borrowed_amount > 0:
+            borrowed_amount = (
+                borrowed_result.get("borrowed_amount", 0)
+                if isinstance(borrowed_result, dict)
+                else 0
+            )
+
+            if borrowed_amount and borrowed_amount > 0:
                 print(f"\n10. Create market order (buy) to repay...")
                 result = await client.create_market_order(
                     symbol=config["symbol"],
                     side="buy",
-                    amount=borrowed,
+                    amount=borrowed_amount,
                 )
                 print(f"create_market_order: {result}")
                 await asyncio.sleep(1)
